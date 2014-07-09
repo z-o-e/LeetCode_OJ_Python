@@ -12,16 +12,24 @@ class Solution:
         if root==None:
             return True
         
-        diff = abs(self.dfs(root.left)-self.dfs(root.right))
-        
-        if diff>1:
+        if self.dfs(root)==-1:
             return False
             
-        return self.isBalanced(root.left) and self.isBalanced(root.right)
+        return True
     
     def dfs(self, root):
         if root==None:
             return 0
             
-        return max(self.dfs(root.left), self.dfs(root.right) ) + 1
+        left = self.dfs(root.left)
+        if left==-1:
+            return -1
+        
+        right = self.dfs(root.right)
+        if right==-1:
+            return -1
+            
+        if abs(left-right)>1:
+            return -1
+        return max(left, right) + 1
         
