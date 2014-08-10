@@ -12,10 +12,9 @@ class Solution:
         if self.n==left==right:
             self.res.append(s)
             return 
-        elif left<self.n:
+        if left<self.n:
             self.dfs(s+'(', left+1, right)
-        elif right<self.n:
+        if right<left and right<self.n:
             self.dfs(s+')', left, right+1)
             
-        return
-    
+        return 
