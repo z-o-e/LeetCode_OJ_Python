@@ -30,6 +30,7 @@ class Solution:
                 
     def isValid(self, idx, board):
         for i in range(idx):
+            # same column or same diagnol
             if board[i]==board[idx] or abs(board[i]-board[idx])==abs(idx-i):
                 return False
         return True
