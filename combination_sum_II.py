@@ -17,6 +17,7 @@ class Solution:
         
         for c in candidates:
             if target-c>=0:
-                tmp = cur[:]
+                tmp, ctmp = cur[:], candidates[:]
                 tmp.append(c)
-                self.dfs(candidates[1:], tmp, target-c)
+                ctmp.remove(c)
+                self.dfs(ctmp, tmp, target-c)
