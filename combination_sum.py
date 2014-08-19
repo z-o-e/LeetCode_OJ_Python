@@ -3,16 +3,20 @@ class Solution:
     # @param target, integer
     # @return a list of lists of integers
     def combinationSum(self, candidates, target):
-        dp={}
-        dp[0]=[[]]
-        for i in range(1,target+1):
-            dp[i]=[]
-            for c in candidates:
-                if c<=i and dp[i-c]:
-                    for item in dp[i-c]:
-                        tmp = sorted([c]+item)
-                        if tmp not in dp[i]:
-                            dp[i].append(tmp)
+        candidates = sorted(candidates)
+        self.res = []
+        self.dfs(candidates, [], target)
         
-        return dp[target] 
+        return self.res
         
+    def dfs(self, candidates, cur, target):
+        if target==0:
+            if sorted(cur) not in self.res:
+                self.res.append(cur)
+            return 
+        
+        for c in candidates:
+            if target-c>=0:
+                tmp = cur[:]
+                tmp.append(c)
+                self.dfs(candidates, tmp, target-c)
