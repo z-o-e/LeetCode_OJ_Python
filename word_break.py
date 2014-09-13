@@ -20,9 +20,3 @@ class Solution:
             return self.dfs(preIdx, curIdx+1, s, D)
             
 
-                        
-s = "leetcode"
-D = ["leet", "code"]
-
-test = Solution()
-print test.wordBreak(s,D)
