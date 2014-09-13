@@ -1,22 +1,23 @@
 class Solution:
     # @param s, a string
-    # @param D, a set of string
+    # @param dict, a set of string
     # @return a boolean
-    def wordBreak(self, s, D):
+    def wordBreak(self, s, dict):
         
-        return self.dfs(0,0,s,D) 
+        return self.dfs(0,0,s,dict) 
     
-    def dfs(self, preIdx, curIdx, s, D):
+    def dfs(self, preIdx, curIdx, s, dict):
         if curIdx==len(s)-1:
-            if s[preIdx:curIdx+1] in D:
+            if s[preIdx:curIdx+1] in dict:
                 return True
             else:
                 return False
                 
-        if s[preIdx:curIdx+1] in D:
-            return self.dfs(curIdx+1, curIdx+1, s, D)
-  
+        if s[preIdx:curIdx+1] in dict:
+            if self.dfs(preIdx, curIdx+1, s, dict) or self.dfs(curIdx+1, curIdx+1, s, dict):
+                return True  
         else:
-            return self.dfs(preIdx, curIdx+1, s, D)
+            return self.dfs(preIdx, curIdx+1, s, dict)
             
 
+                        
