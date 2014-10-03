@@ -3,21 +3,24 @@ class Solution:
     # @param target, integer
     # @return a list of lists of integers
     def combinationSum2(self, candidates, target):
-        candidates = sorted(candidates)
         self.res = []
-        self.dfs(candidates, [], target)
+        self.dfs(candidates, self.res, [], target)
         
         return self.res
         
-    def dfs(self, candidates, cur, target):
-        if target==0:
-            if sorted(cur) not in self.res:
-                self.res.append(cur)
+    def dfs(self, candidates, res, cur, target):
+        if target==0 and cur:
+            cur = sorted(cur)
+            if cur not in res:
+                res.append(cur)
+            return
+            
+        if not candidates:
             return 
         
-        for c in candidates:
-            if target-c>=0:
-                tmp, ctmp = cur[:], candidates[:]
-                tmp.append(c)
-                ctmp.remove(c)
-                self.dfs(ctmp, tmp, target-c)
+        for i in range(len(candidates)):
+            if candidates[i]<=target:
+                tmp = cur[:]
+                tmp.append(candidates[i])
+                self.dfs(candidates[i+1:], res, tmp, target-candidates[i])
+        
